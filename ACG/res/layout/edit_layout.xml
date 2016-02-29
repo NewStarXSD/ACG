@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/edit_bg_shape"
+    android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/dropview_edit"
+        style="?android:attr/textViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@null"
+        android:height="40dip" />
+
+    <ImageView
+        android:id="@+id/dropview_image"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:paddingRight="2dp"
+        android:scaleType="fitXY" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/dropview_edit"
+        android:background="@color/gray" />
+
+</RelativeLayout>

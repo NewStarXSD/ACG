@@ -1,0 +1,224 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:imagecontrol="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/title" />
+
+    <LinearLayout
+        android:id="@+id/titlebox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        android:paddingRight="10dp"
+        android:textSize="20sp" >
+
+        <com.acg.round.RoundImageView
+            android:id="@+id/head"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/head"
+            imagecontrol:border_inside_color="#ffffff"
+            imagecontrol:border_outside_color="#ffffff"
+            imagecontrol:border_thickness="1dp" />
+
+        <LinearLayout
+            android:id="@+id/buttonbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:textSize="20sp" >
+
+            <Button
+                android:id="@+id/find"
+                android:layout_width="100sp"
+                android:layout_height="30sp"
+                android:layout_marginRight="1sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btncon1"
+                android:text="@string/filter"
+                android:textColor="@color/yellow"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/sort"
+                android:layout_width="100sp"
+                android:layout_height="30sp"
+                android:layout_marginLeft="1sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btncon2"
+                android:text="@string/sort"
+                android:textColor="@color/yellow"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/search"
+            android:layout_width="21sp"
+            android:layout_height="30sp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/searchicon" />
+
+        <ImageView
+            android:id="@+id/add"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/addicon" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/textbox1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titlebox"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/total"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/cnt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/total"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/totalmoney"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/total"
+            android:layout_centerHorizontal="true"
+            android:text="@string/totalmoney"
+            android:textColor="@color/red"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/moneys"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textbox1"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textColor="@color/red"
+        android:textSize="40sp" />
+
+    <LinearLayout
+        android:id="@+id/moneytable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/listView"
+        android:layout_marginBottom="20dp" >
+
+        <TextView
+            android:id="@+id/ordermoney"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="@string/order"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/ordernumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/allmoney"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="@string/all"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/allnumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:paddingRight="10dp"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <com.acg.swipemenulistview.SwipeMenuListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/fragmentchoice"
+        android:layout_below="@id/title"
+        android:divider="@color/gray"
+        android:dividerHeight="8dp" />
+
+    <LinearLayout
+        android:id="@+id/fragmentchoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/qkmc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/yellow"
+            android:gravity="center"
+            android:paddingBottom="10sp"
+            android:paddingTop="10sp"
+            android:text="@string/name"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/rq"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingBottom="10sp"
+            android:paddingTop="10sp"
+            android:text="@string/date"
+            android:textColor="@color/yellow"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+</RelativeLayout>

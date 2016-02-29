@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:drop="http://schemas.android.com/apk/res/com.example.acg"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:layout_marginTop="50dp"
+    android:background="@drawable/bg2"
+    android:padding="10dp" >
+
+    <com.acg.lineedit.LineEditText
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <RelativeLayout
+        android:id="@+id/box1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/add" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/photo" >
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/addorder"
+                    android:text="@string/ordermoney"
+                    android:textColor="@color/black" />
+
+                <com.acg.lineedit.LineEditText
+                    android:id="@+id/addordermoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="number" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/addall"
+                    android:text="@string/allmoney"
+                    android:textColor="@color/black" />
+
+                <com.acg.lineedit.LineEditText
+                    android:id="@+id/addallmoney"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="number" />
+            </TableRow>
+
+            <TableRow android:layout_marginTop="10dp" >
+
+                <TextView
+                    android:id="@+id/addstate"
+                    android:text="@string/state"
+                    android:textColor="@color/black" />
+
+                <com.acg.lineedit.LineEditText
+                    android:id="@+id/addstatekind"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:ems="10"
+                    android:inputType="text" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:id="@+id/box2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/photo"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/addname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/goods"
+                android:textColor="@color/black" />
+
+            <com.acg.lineedit.LineEditText
+                android:id="@+id/addgoodsname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null" >
+            </com.acg.lineedit.LineEditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/box3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/box2"
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                android:id="@+id/addkind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kind"
+                android:textColor="@color/black" />
+
+            <com.acg.lineedit.LineEditText
+                android:id="@+id/addgoodskind"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null" >
+            </com.acg.lineedit.LineEditText>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/box4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/box3"
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                android:id="@+id/adddate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/outdate"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/addgoodsdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/textshape"
+                android:gravity="center"
+                android:textColor="@color/black" >
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/box5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/box4"
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                android:id="@+id/addmake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/make"
+                android:textColor="@color/black" />
+
+            <com.acg.dropedit.DropEditText
+                android:id="@+id/addgoodsmake"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                drop:drawableRight="@drawable/addmake"
+                drop:dropMode="flower_parent" />
+
+            <ImageView
+                android:id="@+id/addmakeimage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/addmake" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/box6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/box5"
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                android:id="@+id/addbuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/buy"
+                android:textColor="@color/black" />
+
+            <com.acg.dropedit.DropEditText
+                android:id="@+id/addgoodsbuy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                drop:drawableRight="@drawable/addmake"
+                drop:dropMode="flower_parent" />
+
+            <ImageView
+                android:id="@+id/addbuyimage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/addmake" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/addothers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/box6"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/others"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/addgoodsothers"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/addothers"
+            android:layout_marginTop="10dp"
+            android:gravity="left|top"
+            android:inputType="textMultiLine"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/addgoodsothers"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" >
+
+            <Button
+                android:id="@+id/addok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/addbtncon"
+                android:text="@string/ok"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/addcancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/addbtncon"
+                android:text="@string/cancel"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

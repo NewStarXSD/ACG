@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ACG</string>
+    <string name="action_settings">设置</string>
+    <string name="filter">筛选</string>
+    <string name="sort">排序</string>
+    <string name="total">订单总数：</string>
+    <string name="totalmoney">尾款总额</string>
+    <string name="name">订单</string>
+    <string name="date">信息</string>
+    <string name="datesimple">2015/12/24</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="order">定金总额：</string>
+    <string name="all">全款总额</string>
+    <string name="goods">商品名称：</string>
+    <string name="outdate">预计出货日期：</string>
+    <string name="ordermoney">定金：</string>
+    <string name="allmoney">全款：</string>
+    <string name="needmoney">尾款：</string>
+    <string name="kind">版式：</string>
+    <string name="make">制造商：</string>
+    <string name="buy">供货商：</string>
+    <string name="state">状态：</string>
+    <string name="others">备注：</string>
+
+</resources>
