@@ -8,9 +8,13 @@ import java.util.Calendar;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,6 +41,8 @@ public class FloatActivity extends Activity {
 
 	private final int REQUEST_IMAGE = 1;
 	private static final int SCALE = 5;
+
+	private int flag = 0;
 
 	private TextView DateTime;
 	private String initDateTime = new SimpleDateFormat("yyyy-MM-dd")
@@ -141,13 +147,52 @@ public class FloatActivity extends Activity {
 				startActivityForResult(intent, REQUEST_IMAGE);
 			}
 		});
+
+		final Button states = (Button) findViewById(R.id.addstatekind);
+		states.setOnClickListener(new OnClickListener() {
+
+			int item = 0;
+
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						FloatActivity.this);
+				builder.setTitle("请选择状态");
+				final String[] st = { "已预订", "已补款", "已完成" };
+				builder.setSingleChoiceItems(st, 0,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								item = which;
+							}
+						});
+				builder.setPositiveButton("确定",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								states.setText(st[item]);
+							}
+						});
+				builder.setNegativeButton("取消",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								return;
+							}
+						});
+				builder.show();
+			}
+		});
+
 		Button ok = (Button) findViewById(R.id.addok);
 		ok.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
 
 				LineEditText et1 = (LineEditText) findViewById(R.id.addordermoney);
 				LineEditText et2 = (LineEditText) findViewById(R.id.addallmoney);
-				LineEditText et3 = (LineEditText) findViewById(R.id.addstatekind);
+				Button et3 = (Button) findViewById(R.id.addstatekind);
 				LineEditText et4 = (LineEditText) findViewById(R.id.addgoodsname);
 				LineEditText et5 = (LineEditText) findViewById(R.id.addgoodskind);
 				TextView et6 = (TextView) findViewById(R.id.addgoodsdate);
@@ -159,6 +204,11 @@ public class FloatActivity extends Activity {
 				Bitmap img = ((BitmapDrawable) imageView.getDrawable())
 						.getBitmap();
 
+				if (flag == 0) {
+					img = BitmapFactory.decodeResource(getResources(),
+							R.drawable.logo);
+				}
+
 				String str1 = et4.getText().toString();
 				String str2 = et6.getText().toString();
 				String str3 = et5.getText().toString();
@@ -166,11 +216,11 @@ public class FloatActivity extends Activity {
 				String str5 = et8.getText().toString();
 				String str6 = et1.getText().toString();
 				String str7 = et2.getText().toString();
-				if(str6.equals("")){
-					return ;
+				if (str6.equals("")) {
+					return;
 				}
-				if(str7.equals("")){
-					return ;
+				if (str7.equals("")) {
+					return;
 				}
 				double dou6 = Double.parseDouble(et1.getText().toString());
 				double dou7 = Double.parseDouble(et2.getText().toString());
@@ -216,7 +266,7 @@ public class FloatActivity extends Activity {
 								phototmp.getWidth() / SCALE,
 								phototmp.getHeight() / SCALE);
 						phototmp.recycle();
-
+						flag = 1;
 						photo.setImageBitmap(smallBitmap);
 					}
 				} catch (FileNotFoundException e) {

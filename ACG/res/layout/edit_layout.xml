@@ -16,7 +16,7 @@
     <ImageView
         android:id="@+id/dropview_image"
         android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_height="10dp"
         android:layout_alignParentRight="true"
         android:paddingRight="2dp"
         android:scaleType="fitXY" />

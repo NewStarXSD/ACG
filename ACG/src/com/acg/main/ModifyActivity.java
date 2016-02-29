@@ -9,7 +9,9 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -61,7 +63,7 @@ public class ModifyActivity extends Activity {
 
 		final LineEditText et1 = (LineEditText) findViewById(R.id.addordermoney);
 		final LineEditText et2 = (LineEditText) findViewById(R.id.addallmoney);
-		final LineEditText et3 = (LineEditText) findViewById(R.id.addstatekind);
+		final Button et3 = (Button) findViewById(R.id.addstatekind);
 		final LineEditText et4 = (LineEditText) findViewById(R.id.addgoodsname);
 		final LineEditText et5 = (LineEditText) findViewById(R.id.addgoodskind);
 		final TextView et6 = (TextView) findViewById(R.id.addgoodsdate);
@@ -181,6 +183,43 @@ public class ModifyActivity extends Activity {
 				Intent intent = new Intent(Intent.ACTION_PICK, null);
 				intent.setType("image/*");
 				startActivityForResult(intent, REQUEST_IMAGE);
+			}
+		});
+		final Button states = (Button) findViewById(R.id.addstatekind);
+		states.setOnClickListener(new OnClickListener() {
+
+			int item = 0;
+
+			public void onClick(View v) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						ModifyActivity.this);
+				builder.setTitle("请选择状态");
+				final String[] st = { "已预订", "已补款", "已完成" };
+				builder.setSingleChoiceItems(st, 0,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								item = which;
+							}
+						});
+				builder.setPositiveButton("确定",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								states.setText(st[item]);
+							}
+						});
+				builder.setNegativeButton("取消",
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								return;
+							}
+						});
+				builder.show();
 			}
 		});
 

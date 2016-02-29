@@ -48,8 +48,7 @@
                     android:inputType="number" />
             </TableRow>
 
-            <TableRow
-                android:layout_marginTop="10dp" >
+            <TableRow android:layout_marginTop="10dp" >
 
                 <TextView
                     android:id="@+id/addall"
@@ -73,14 +72,14 @@
                     android:text="@string/state"
                     android:textColor="@color/black" />
 
-                <com.acg.lineedit.LineEditText
+                <Button
                     android:id="@+id/addstatekind"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@null"
+                    android:background="@drawable/btn_state"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:text="@string/states" />
             </TableRow>
         </TableLayout>
 
@@ -175,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                drop:drawableRight="@drawable/addmake"
+                drop:drawableRight="@drawable/adddown"
                 drop:dropMode="flower_parent" />
 
             <ImageView
@@ -204,7 +203,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                drop:drawableRight="@drawable/addmake"
+                drop:drawableRight="@drawable/adddown"
                 drop:dropMode="flower_parent" />
 
             <ImageView

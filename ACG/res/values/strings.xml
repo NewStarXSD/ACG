@@ -23,6 +23,7 @@
     <string name="make">制造商：</string>
     <string name="buy">供货商：</string>
     <string name="state">状态：</string>
+    <string name="states">状态</string>
     <string name="others">备注：</string>
 
 </resources>

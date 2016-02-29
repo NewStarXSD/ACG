@@ -86,21 +86,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class drawable {
         public static final int add=0x7f020000;
         public static final int addbtncon=0x7f020001;
-        public static final int addicon=0x7f020002;
-        public static final int addmake=0x7f020003;
-        public static final int bg=0x7f020004;
-        public static final int bg2=0x7f020005;
-        public static final int btncon1=0x7f020006;
-        public static final int btncon2=0x7f020007;
-        public static final int drop=0x7f020008;
-        public static final int edit_bg_shape=0x7f020009;
-        public static final int head=0x7f02000a;
-        public static final int ic_delete=0x7f02000b;
-        public static final int ic_launcher=0x7f02000c;
-        public static final int othericon=0x7f02000d;
-        public static final int searchicon=0x7f02000e;
-        public static final int textshape=0x7f02000f;
-        public static final int title=0x7f020010;
+        public static final int adddown=0x7f020002;
+        public static final int addicon=0x7f020003;
+        public static final int addmake=0x7f020004;
+        public static final int bg=0x7f020005;
+        public static final int bg2=0x7f020006;
+        public static final int btn_state=0x7f020007;
+        public static final int btncon1=0x7f020008;
+        public static final int btncon2=0x7f020009;
+        public static final int drop=0x7f02000a;
+        public static final int edit_bg_shape=0x7f02000b;
+        public static final int head=0x7f02000c;
+        public static final int ic_delete=0x7f02000d;
+        public static final int ic_launcher=0x7f02000e;
+        public static final int logo=0x7f02000f;
+        public static final int othericon=0x7f020010;
+        public static final int searchicon=0x7f020011;
+        public static final int textshape=0x7f020012;
+        public static final int title=0x7f020013;
     }
     public static final class id {
         public static final int L1=0x7f050041;
@@ -216,10 +219,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ok=0x7f080009;
         public static final int order=0x7f08000b;
         public static final int ordermoney=0x7f08000f;
-        public static final int others=0x7f080016;
+        public static final int others=0x7f080017;
         public static final int outdate=0x7f08000e;
         public static final int sort=0x7f080003;
         public static final int state=0x7f080015;
+        public static final int states=0x7f080016;
         public static final int total=0x7f080004;
         public static final int totalmoney=0x7f080005;
     }
