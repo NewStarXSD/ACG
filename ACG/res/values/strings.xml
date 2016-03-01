@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ACG</string>
+    <string name="app_name">叮勾</string>
     <string name="action_settings">设置</string>
     <string name="filter">筛选</string>
     <string name="sort">排序</string>
