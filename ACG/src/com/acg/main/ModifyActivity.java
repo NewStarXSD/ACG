@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -28,8 +29,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.acg.access.BuyService;
+import com.acg.access.MakeService;
 import com.acg.access.Order;
 import com.acg.access.OrderService;
+import com.acg.access.WhereBuy;
+import com.acg.access.WhoMake;
 import com.acg.date.DateTimePickDialogUtil;
 import com.acg.dropedit.DropEditText;
 import com.acg.image.ImageTools;
@@ -54,9 +59,14 @@ public class ModifyActivity extends Activity {
 
 	private ImageView imageView;
 
+	private MakeService db1 = new MakeService(ModifyActivity.this);
+	private BuyService db2 = new BuyService(ModifyActivity.this);
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.additem);
+
+		init();
 
 		Intent intent = this.getIntent();
 		no = (Integer) intent.getSerializableExtra("dataorder");
@@ -134,7 +144,12 @@ public class ModifyActivity extends Activity {
 
 			public void onClick(View arg0) {
 				String whoMake = makeby.getText();
-				mList1.add(whoMake);
+				if (!db1.addMaker(new WhoMake(db2.getCount(), whoMake))) {
+					Toast.makeText(ModifyActivity.this, "该制造商已存在",
+							Toast.LENGTH_LONG).show();
+				} else {
+					mList2.add(whoMake);
+				}
 			}
 		});
 		makeby.setAdapter(adapter1);
@@ -164,8 +179,13 @@ public class ModifyActivity extends Activity {
 		buy.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View arg0) {
-				String whoMake = buyby.getText();
-				mList2.add(whoMake);
+				String whereBuy = buyby.getText();
+				if (!db2.addBuy(new WhereBuy(db2.getCount(), whereBuy))) {
+					Toast.makeText(ModifyActivity.this, "该供货商已存在",
+							Toast.LENGTH_LONG).show();
+				} else {
+					mList2.add(whereBuy);
+				}
 			}
 		});
 		buyby.setAdapter(adapter2);
@@ -261,6 +281,23 @@ public class ModifyActivity extends Activity {
 				finish();
 			}
 		});
+	}
+
+	private void init() {
+		List<WhoMake> ml = db1.findMakerList(0, db1.getCount());
+		for (WhoMake ms : ml) {
+			HashMap<String, Object> item = new HashMap<String, Object>();
+			item.put("编号", ms.no);
+			item.put("制造商", ms.name);
+			mList1.add(ms.name);
+		}
+		List<WhereBuy> bl = db2.findBuyList(0, db2.getCount());
+		for (WhereBuy bs : bl) {
+			HashMap<String, Object> item = new HashMap<String, Object>();
+			item.put("编号", bs.no);
+			item.put("供货商", bs.name);
+			mList2.add(bs.name);
+		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

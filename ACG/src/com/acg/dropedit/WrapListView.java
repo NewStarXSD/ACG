@@ -30,6 +30,5 @@ public class WrapListView extends ListView {
 
 	protected void setListWidth(int width) {
 		mWidth = width;
-		System.out.println("setWidth");
 	}
 }

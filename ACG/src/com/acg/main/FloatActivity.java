@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -12,7 +13,6 @@ import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,8 +29,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.acg.access.BuyService;
+import com.acg.access.MakeService;
 import com.acg.access.Order;
 import com.acg.access.OrderService;
+import com.acg.access.WhereBuy;
+import com.acg.access.WhoMake;
 import com.acg.date.DateTimePickDialogUtil;
 import com.acg.dropedit.DropEditText;
 import com.acg.image.ImageTools;
@@ -54,9 +58,14 @@ public class FloatActivity extends Activity {
 
 	private ImageView photo = null;
 
+	private MakeService db1 = new MakeService(FloatActivity.this);
+	private BuyService db2 = new BuyService(FloatActivity.this);
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.additem);
+
+		init();
 
 		DateTime = (TextView) findViewById(R.id.addgoodsdate);
 		DateTime.setText(initDateTime);
@@ -96,7 +105,12 @@ public class FloatActivity extends Activity {
 
 			public void onClick(View arg0) {
 				String whoMake = makeby.getText();
-				mList1.add(whoMake);
+				if (!db1.addMaker(new WhoMake(db2.getCount(), whoMake))) {
+					Toast.makeText(FloatActivity.this, "该制造商已存在",
+							Toast.LENGTH_LONG).show();
+				} else {
+					mList2.add(whoMake);
+				}
 			}
 		});
 		makeby.setAdapter(adapter1);
@@ -126,8 +140,13 @@ public class FloatActivity extends Activity {
 		buy.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View arg0) {
-				String whoMake = buyby.getText();
-				mList2.add(whoMake);
+				String whereBuy = buyby.getText();
+				if (!db2.addBuy(new WhereBuy(db2.getCount(), whereBuy))) {
+					Toast.makeText(FloatActivity.this, "该供货商已存在",
+							Toast.LENGTH_LONG).show();
+				} else {
+					mList2.add(whereBuy);
+				}
 			}
 		});
 		buyby.setAdapter(adapter2);
@@ -249,6 +268,39 @@ public class FloatActivity extends Activity {
 				finish();
 			}
 		});
+	}
+
+	private void init() {
+		db1.addMaker(new WhoMake(db1.getCount(), "GOOD SMILE COMPANY"));
+		db1.addMaker(new WhoMake(db1.getCount(), "MaxFactory"));
+		db1.addMaker(new WhoMake(db1.getCount(), "ALTER"));
+		db1.addMaker(new WhoMake(db1.getCount(), "寿屋"));
+		db1.addMaker(new WhoMake(db1.getCount(), "MegaHouse"));
+		db1.addMaker(new WhoMake(db1.getCount(), "Griffon"));
+		db1.addMaker(new WhoMake(db1.getCount(), "Orchid Seed"));
+		db1.addMaker(new WhoMake(db1.getCount(), "wave"));
+		db1.addMaker(new WhoMake(db1.getCount(), "Banpresto"));
+		db1.addMaker(new WhoMake(db1.getCount(), "海洋堂"));
+		List<WhoMake> ml = db1.findMakerList(0, db1.getCount());
+		for (WhoMake ms : ml) {
+			HashMap<String, Object> item = new HashMap<String, Object>();
+			item.put("编号", ms.no);
+			item.put("制造商", ms.name);
+			mList1.add(ms.name);
+		}
+		db2.addBuy(new WhereBuy(db2.getCount(), "电玩男の里屋"));
+		db2.addBuy(new WhereBuy(db2.getCount(), "MaosouHouse 猫受屋"));
+		db2.addBuy(new WhereBuy(db2.getCount(), "鹤屋通贩 Churuya Online"));
+		db2.addBuy(new WhereBuy(db2.getCount(), "同萌会手办"));
+		db2.addBuy(new WhereBuy(db2.getCount(), "52TOYS"));
+		db2.addBuy(new WhereBuy(db2.getCount(), "移不动展示盒"));
+		List<WhereBuy> bl = db2.findBuyList(0, db2.getCount());
+		for (WhereBuy bs : bl) {
+			HashMap<String, Object> item = new HashMap<String, Object>();
+			item.put("编号", bs.no);
+			item.put("供货商", bs.name);
+			mList2.add(bs.name);
+		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

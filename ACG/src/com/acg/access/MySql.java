@@ -19,6 +19,10 @@ public class MySql extends SQLiteOpenHelper {
 				+ "商品名称 VARCHAR(50)," + "出货日期 DATE," + "版式 VARCHAR(50),"
 				+ "制造商 VARCHAR(50)," + "供货商 VARCHAR(50)," + "定金 DOUBLE,"
 				+ "全款 DOUBLE," + "状态 INTEGER," + "图片 BLOB," + "备注 TEXT);");
+		db.execSQL("CREATE TABLE IF NOT EXISTS pvcMakers" + "(编号 INTEGER,"
+				+ "制造商 VARCHAR(50));");
+		db.execSQL("CREATE TABLE IF NOT EXISTS pvcBuys" + "(编号 INTEGER,"
+				+ "供货商 VARCHAR(50));");
 
 	}
 
