@@ -2,6 +2,7 @@ package com.acg.main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,7 +11,9 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +23,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -65,7 +69,8 @@ public class ModifyActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.additem);
-
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		init();
 
 		Intent intent = this.getIntent();
@@ -107,7 +112,7 @@ public class ModifyActivity extends Activity {
 		imageView.setImageBitmap(order.img);
 
 		DateTime = (TextView) findViewById(R.id.addgoodsdate);
-		DateTime.setText(initDateTime);
+		DateTime.setText(order.outDate);
 		DateTime.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
 
@@ -268,12 +273,28 @@ public class ModifyActivity extends Activity {
 					state = 2;
 				}
 
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				long time = 0;
+				try {
+					time = sdf.parse(str2).getTime();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				if (order.state == 0) {
+					setReminder(false, order.no, time);
+				}
+
 				OrderService o1 = new OrderService(ModifyActivity.this);
 
 				Order order = new Order(no, str1, str2, str3, str4, str5, dou6,
 						dou7, dou8, state, img, str9);
 
 				o1.modify(order);
+				if (statestr.equals("已预订")) {
+					setReminder(true, order.no, time);
+				} else {
+					setReminder(false, order.no, time);
+				}
 				Toast.makeText(ModifyActivity.this, "修改成功", Toast.LENGTH_SHORT)
 						.show();
 				Intent intent = new Intent();
@@ -297,6 +318,23 @@ public class ModifyActivity extends Activity {
 			item.put("编号", bs.no);
 			item.put("供货商", bs.name);
 			mList2.add(bs.name);
+		}
+	}
+
+	public void setReminder(boolean b, int no, long time) {
+		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+		Intent it = new Intent(ModifyActivity.this, MyReceiver.class);
+		it.putExtra("no", no);
+		PendingIntent pi = PendingIntent.getBroadcast(ModifyActivity.this, no,
+				it, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		if (b) {
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(time);
+			c.add(Calendar.HOUR, 8);
+			am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+		} else {
+			am.cancel(pi);
 		}
 	}
 

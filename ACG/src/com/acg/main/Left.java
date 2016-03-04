@@ -1,23 +1,28 @@
 package com.acg.main;
 
-import com.example.acg.R;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class Other extends Activity {
+import com.example.acg.R;
+
+public class Left extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.other);
+		setContentView(R.layout.left_bar);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		Intent intent = this.getIntent();
-		String other = (String) intent.getSerializableExtra("other");
-		TextView othertext = (TextView) findViewById(R.id.othertext);
-		othertext.setText(other);
+		TextView back = (TextView) findViewById(R.id.alpha);
+		back.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				finish();
+			}
+		});
+
 	}
 }

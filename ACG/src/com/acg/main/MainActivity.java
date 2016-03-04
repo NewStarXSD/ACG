@@ -2,16 +2,20 @@ package com.acg.main;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -21,8 +25,8 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.acg.access.Order;
 import com.acg.access.OrderService;
@@ -192,6 +196,10 @@ public class MainActivity extends Activity {
 				switch (index) {
 				case 0:
 					// delete
+					HashMap<String, Object> item = data.get(position);
+					if (((String) item.get("×´Ì¬")).equals("ÒÑÔ¤¶©")) {
+						cancelintent(position);
+					}
 					delete(position);
 					totaldouble = alldouble - orderdouble;
 					strmoney = totalmoney.format(totaldouble);
@@ -204,8 +212,20 @@ public class MainActivity extends Activity {
 					break;
 
 				case 1:
-					HashMap<String, Object> item = data.get(position);
+					item = data.get(position);
 					int no = (Integer) item.get("±àºÅ");
+					if (((String) item.get("×´Ì¬")).equals("ÒÑÔ¤¶©")) {
+						cancelintent(position);
+					}
+					String str2 = (String)item.get("³ö»õÈÕÆÚ");
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					long time = 0;
+					try {
+						time = sdf.parse(str2).getTime();
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					setReminder(true, no, time);
 					db.modifyOrderState(no, BUY);
 					List<HashMap<String, Object>> newlist = null;
 					newlist = mod(newlist);
@@ -215,6 +235,9 @@ public class MainActivity extends Activity {
 					break;
 				case 2:
 					item = data.get(position);
+					if (((String) item.get("×´Ì¬")).equals("ÒÑÔ¤¶©")) {
+						cancelintent(position);
+					}
 					no = (Integer) item.get("±àºÅ");
 					db.modifyOrderState(no, PAY);
 					newlist = null;
@@ -225,6 +248,9 @@ public class MainActivity extends Activity {
 					break;
 				case 3:
 					item = data.get(position);
+					if (((String) item.get("×´Ì¬")).equals("ÒÑÔ¤¶©")) {
+						cancelintent(position);
+					}
 					no = (Integer) item.get("±àºÅ");
 					db.modifyOrderState(no, OVER);
 					newlist = null;
@@ -252,6 +278,17 @@ public class MainActivity extends Activity {
 			}
 		});
 
+		ImageView toLeft = (ImageView) findViewById(R.id.outleft);
+		toLeft.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				Intent toinsert = new Intent();
+				toinsert.setClass(MainActivity.this, Left.class);
+				startActivityForResult(toinsert, 1);
+				// MainActivity.this.overridePendingTransition(R.anim.left_in,0);
+			}
+		});
+
 		ImageView add = (ImageView) findViewById(R.id.add);
 		add.setOnClickListener(new OnClickListener() {
 
@@ -259,18 +296,63 @@ public class MainActivity extends Activity {
 				Intent toinsert = new Intent();
 				toinsert.setClass(MainActivity.this, FloatActivity.class);
 				startActivityForResult(toinsert, 1);
-
+				MainActivity.this.overridePendingTransition(
+						R.anim.push_bottom_in, 0);
 			}
 		});
 
+	}
+
+	public void setReminder(boolean b, int no, long time) {
+		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+		Intent it = new Intent(MainActivity.this, MyReceiver.class);
+		it.putExtra("no", no);
+		PendingIntent pi = PendingIntent.getBroadcast(MainActivity.this, no,
+				it, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		if (b) {
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(time);
+			c.add(Calendar.HOUR, 8);
+			am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+		} else {
+			am.cancel(pi);
+		}
+	}
+
+	private void cancelintent(int position) {
+		HashMap<String, Object> item = data.get(position);
+		int no = (Integer) item.get("±àºÅ");
+		Intent it = new Intent(this, MyReceiver.class);
+		PendingIntent pi = PendingIntent.getBroadcast(MainActivity.this, no,
+				it, PendingIntent.FLAG_UPDATE_CURRENT);
+		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+		am.cancel(pi);
 	}
 
 	private void delete(int position) {
 		HashMap<String, Object> item = data.get(position);
 		int no = (Integer) item.get("±àºÅ");
 		db.deleteOrder(no);
-		for (int i = no + 1; i <= db.getCount() + 1; i++) {
+		System.out.println(db.getCount());
+		for (int i = no + 1; i < db.getCount() + 1; i++) {
 			db.modifyOrder(i);
+			Order o = db.findOrder(i);
+			if (o.state == BUY) {
+				Intent it = new Intent(this, MyReceiver.class);
+				PendingIntent pi = PendingIntent.getBroadcast(
+						MainActivity.this, no, it,
+						PendingIntent.FLAG_UPDATE_CURRENT);
+				AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+				am.cancel(pi);
+				it.putExtra("no", i - 1);
+				pi = PendingIntent.getBroadcast(MainActivity.this, i - 1, it,
+						PendingIntent.FLAG_UPDATE_CURRENT);
+				Calendar c = Calendar.getInstance();
+				c.setTimeInMillis(System.currentTimeMillis());
+				c.add(Calendar.SECOND, 10);
+				am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+			}
 		}
 
 		List<HashMap<String, Object>> newlist = null;

@@ -115,13 +115,8 @@ public class DateTimePickDialogUtil implements OnDateChangedListener,
 		ad.setTitle(dateTime);
 	}
 
-	/**
-	 * 实现将初始日期时间2012年07月02日 16:45 拆分成年 月 日 时 分 秒,并赋值给calendar
-	 * 
-	 * @param initDateTime
-	 *            初始日期时间值 字符串型
-	 * @return Calendar
-	 */
+
+	
 	private Calendar getCalendarByInintData(String initDateTime) {
 		Calendar calendar = Calendar.getInstance();
 

@@ -9,8 +9,9 @@ package com.example.acg;
 
 public final class R {
     public static final class anim {
-        public static final int push_bottom_in=0x7f040000;
-        public static final int push_bottom_out=0x7f040001;
+        public static final int left_in=0x7f040000;
+        public static final int push_bottom_in=0x7f040001;
+        public static final int push_bottom_out=0x7f040002;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -100,95 +101,96 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_delete=0x7f02000d;
         public static final int ic_launcher=0x7f02000e;
         public static final int logo=0x7f02000f;
-        public static final int othericon=0x7f020010;
-        public static final int searchicon=0x7f020011;
-        public static final int textshape=0x7f020012;
-        public static final int title=0x7f020013;
+        public static final int logo_title=0x7f020010;
+        public static final int othericon=0x7f020011;
+        public static final int outleft=0x7f020012;
+        public static final int searchicon=0x7f020013;
+        public static final int textshape=0x7f020014;
+        public static final int title=0x7f020015;
     }
     public static final class id {
-        public static final int L1=0x7f050041;
-        public static final int L2=0x7f050044;
-        public static final int L3=0x7f050047;
-        public static final int add=0x7f05000a;
-        public static final int addall=0x7f05001d;
-        public static final int addallmoney=0x7f05001e;
-        public static final int addbuy=0x7f05002f;
-        public static final int addbuyimage=0x7f050031;
-        public static final int addcancel=0x7f050035;
-        public static final int adddate=0x7f050028;
-        public static final int addgoodsbuy=0x7f050030;
-        public static final int addgoodsdate=0x7f050029;
-        public static final int addgoodskind=0x7f050026;
-        public static final int addgoodsmake=0x7f05002c;
-        public static final int addgoodsname=0x7f050023;
-        public static final int addgoodsothers=0x7f050033;
-        public static final int addkind=0x7f050025;
-        public static final int addmake=0x7f05002b;
-        public static final int addmakeimage=0x7f05002d;
-        public static final int addname=0x7f050022;
-        public static final int addok=0x7f050034;
-        public static final int addorder=0x7f05001b;
-        public static final int addordermoney=0x7f05001c;
-        public static final int addothers=0x7f050032;
-        public static final int addstate=0x7f05001f;
-        public static final int addstatekind=0x7f050020;
-        public static final int allm=0x7f05004e;
-        public static final int allmoney=0x7f050014;
-        public static final int allnumber=0x7f050015;
+        public static final int L1=0x7f05003f;
+        public static final int L2=0x7f050042;
+        public static final int L3=0x7f050045;
+        public static final int add=0x7f050007;
+        public static final int addall=0x7f05001b;
+        public static final int addallmoney=0x7f05001c;
+        public static final int addbuy=0x7f05002d;
+        public static final int addbuyimage=0x7f05002f;
+        public static final int addcancel=0x7f050033;
+        public static final int adddate=0x7f050026;
+        public static final int addgoodsbuy=0x7f05002e;
+        public static final int addgoodsdate=0x7f050027;
+        public static final int addgoodskind=0x7f050024;
+        public static final int addgoodsmake=0x7f05002a;
+        public static final int addgoodsname=0x7f050021;
+        public static final int addgoodsothers=0x7f050031;
+        public static final int addkind=0x7f050023;
+        public static final int addmake=0x7f050029;
+        public static final int addmakeimage=0x7f05002b;
+        public static final int addname=0x7f050020;
+        public static final int addok=0x7f050032;
+        public static final int addorder=0x7f050019;
+        public static final int addordermoney=0x7f05001a;
+        public static final int addothers=0x7f050030;
+        public static final int addstate=0x7f05001d;
+        public static final int addstatekind=0x7f05001e;
+        public static final int allm=0x7f05004c;
+        public static final int allmoney=0x7f050012;
+        public static final int allnumber=0x7f050013;
+        public static final int alpha=0x7f05004f;
         public static final int background=0x7f050002;
-        public static final int box1=0x7f050019;
-        public static final int box2=0x7f050021;
-        public static final int box3=0x7f050024;
-        public static final int box4=0x7f050027;
-        public static final int box5=0x7f05002a;
-        public static final int box6=0x7f05002e;
-        public static final int buttonbox=0x7f050006;
-        public static final int buy=0x7f05004a;
-        public static final int cnt=0x7f05000d;
-        public static final int datepicker=0x7f050036;
-        public static final int dropview_edit=0x7f050037;
-        public static final int dropview_image=0x7f050038;
-        public static final int expandtab_view=0x7f050051;
-        public static final int find=0x7f050007;
+        public static final int box1=0x7f050017;
+        public static final int box2=0x7f05001f;
+        public static final int box3=0x7f050022;
+        public static final int box4=0x7f050025;
+        public static final int box5=0x7f050028;
+        public static final int box6=0x7f05002c;
+        public static final int buy=0x7f050048;
+        public static final int cnt=0x7f05000b;
+        public static final int datepicker=0x7f050034;
+        public static final int dropview_edit=0x7f050035;
+        public static final int dropview_image=0x7f050036;
+        public static final int expandtab_view=0x7f050050;
         public static final int flower_parent=0x7f050000;
-        public static final int fragmentchoice=0x7f050016;
-        public static final int goods=0x7f05003a;
+        public static final int fragmentchoice=0x7f050014;
+        public static final int goods=0x7f050038;
         public static final int head=0x7f050005;
-        public static final int icon=0x7f05003e;
-        public static final int kind=0x7f050046;
-        public static final int kinds=0x7f050045;
-        public static final int listView=0x7f050011;
-        public static final int make=0x7f050048;
-        public static final int moneybox=0x7f05004c;
-        public static final int moneys=0x7f05000f;
-        public static final int moneytable=0x7f050010;
-        public static final int name=0x7f05003b;
-        public static final int namebox=0x7f050039;
-        public static final int nametable=0x7f05003f;
-        public static final int needm=0x7f05004f;
-        public static final int needmoney=0x7f050050;
-        public static final int orderm=0x7f05004d;
-        public static final int ordermoney=0x7f050012;
-        public static final int ordernumber=0x7f050013;
-        public static final int other=0x7f050040;
-        public static final int othertext=0x7f050053;
-        public static final int ott=0x7f050052;
-        public static final int outDates=0x7f050042;
-        public static final int outdate=0x7f050043;
-        public static final int photo=0x7f05001a;
-        public static final int picbox=0x7f05003d;
-        public static final int qkmc=0x7f050017;
-        public static final int rq=0x7f050018;
-        public static final int search=0x7f050009;
-        public static final int sort=0x7f050008;
-        public static final int state=0x7f05003c;
-        public static final int textbox1=0x7f05000b;
+        public static final int icon=0x7f05003c;
+        public static final int kind=0x7f050044;
+        public static final int kinds=0x7f050043;
+        public static final int listView=0x7f05000f;
+        public static final int make=0x7f050046;
+        public static final int moneybox=0x7f05004a;
+        public static final int moneys=0x7f05000d;
+        public static final int moneytable=0x7f05000e;
+        public static final int name=0x7f050039;
+        public static final int namebox=0x7f050037;
+        public static final int nametable=0x7f05003d;
+        public static final int needm=0x7f05004d;
+        public static final int needmoney=0x7f05004e;
+        public static final int orderm=0x7f05004b;
+        public static final int ordermoney=0x7f050010;
+        public static final int ordernumber=0x7f050011;
+        public static final int other=0x7f05003e;
+        public static final int othertext=0x7f050052;
+        public static final int ott=0x7f050051;
+        public static final int outDates=0x7f050040;
+        public static final int outdate=0x7f050041;
+        public static final int outleft=0x7f050008;
+        public static final int photo=0x7f050018;
+        public static final int picbox=0x7f05003b;
+        public static final int qkmc=0x7f050015;
+        public static final int rq=0x7f050016;
+        public static final int state=0x7f05003a;
+        public static final int textbox1=0x7f050009;
         public static final int title=0x7f050003;
         public static final int titlebox=0x7f050004;
-        public static final int total=0x7f05000c;
-        public static final int totalmoney=0x7f05000e;
-        public static final int wherebuy=0x7f05004b;
-        public static final int whomake=0x7f050049;
+        public static final int titlelogo=0x7f050006;
+        public static final int total=0x7f05000a;
+        public static final int totalmoney=0x7f05000c;
+        public static final int wherebuy=0x7f050049;
+        public static final int whomake=0x7f050047;
         public static final int wrap_content=0x7f050001;
     }
     public static final class layout {
@@ -197,9 +199,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int common_datetime=0x7f030002;
         public static final int edit_layout=0x7f030003;
         public static final int item=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int other=0x7f030006;
-        public static final int pop_view=0x7f030007;
+        public static final int left_bar=0x7f030005;
+        public static final int main=0x7f030006;
+        public static final int other=0x7f030007;
+        public static final int pop_view=0x7f030008;
     }
     public static final class string {
         public static final int action_settings=0x7f080001;
@@ -228,17 +231,14 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int totalmoney=0x7f080005;
     }
     public static final class style {
-        public static final int AnimBottom=0x7f090003;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
-
         
 
         Base application theme for API 11+. This theme completely replaces
@@ -258,6 +258,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int AppTheme=0x7f090001;
         public static final int DialogStyleBottom=0x7f090002;
+        public static final int LeftBar=0x7f090003;
     }
     public static final class styleable {
         /** Attributes that can be used with a DropEditText.

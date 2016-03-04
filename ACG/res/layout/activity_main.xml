@@ -17,7 +17,7 @@
         android:layout_height="200dp"
         android:background="@drawable/title" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/titlebox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,54 +37,35 @@
             imagecontrol:border_outside_color="#ffffff"
             imagecontrol:border_thickness="1dp" />
 
-        <LinearLayout
-            android:id="@+id/buttonbox"
+        <ImageView
+            android:id="@+id/titlelogo"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:textSize="20sp" >
-
-            <Button
-                android:id="@+id/find"
-                android:layout_width="100sp"
-                android:layout_height="30sp"
-                android:layout_marginRight="1sp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btncon1"
-                android:text="@string/filter"
-                android:textColor="@color/yellow"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/sort"
-                android:layout_width="100sp"
-                android:layout_height="30sp"
-                android:layout_marginLeft="1sp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btncon2"
-                android:text="@string/sort"
-                android:textColor="@color/yellow"
-                android:textSize="20sp" />
-        </LinearLayout>
+            android:layout_height="30sp"
+            android:layout_alignTop="@+id/add"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/logo_title" />
 
         <ImageView
-            android:id="@+id/search"
-            android:layout_width="21sp"
+            android:id="@+id/outleft"
+            android:layout_width="30sp"
             android:layout_height="30sp"
-            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/searchicon" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/outleft" />
 
         <ImageView
             android:id="@+id/add"
             android:layout_width="30sp"
             android:layout_height="30sp"
-            android:layout_marginLeft="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/outleft"
             android:scaleType="fitXY"
             android:src="@drawable/addicon" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/textbox1"

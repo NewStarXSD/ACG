@@ -2,6 +2,7 @@ package com.acg.main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,7 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,6 +25,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -42,7 +46,7 @@ import com.acg.lineedit.LineEditText;
 import com.example.acg.R;
 
 public class FloatActivity extends Activity {
-
+	public static final String INTENAL_ACTION_1 = "com.example.demobroadcast.BroadcastAction";
 	private final int REQUEST_IMAGE = 1;
 	private static final int SCALE = 5;
 
@@ -64,7 +68,8 @@ public class FloatActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.additem);
-
+		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		init();
 
 		DateTime = (TextView) findViewById(R.id.addgoodsdate);
@@ -75,7 +80,6 @@ public class FloatActivity extends Activity {
 				DateTimePickDialogUtil dateTimePicKDialog = new DateTimePickDialogUtil(
 						FloatActivity.this, initDateTime);
 				dateTimePicKDialog.dateTimePicKDialog(DateTime);
-
 			}
 		});
 
@@ -257,10 +261,20 @@ public class FloatActivity extends Activity {
 
 				OrderService o1 = new OrderService(FloatActivity.this);
 
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				long time = 0;
+				try {
+					time = sdf.parse(str2).getTime();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 				Order order = new Order(o1.getCount(), str1, str2, str3, str4,
 						str5, dou6, dou7, dou8, state, img, str9);
 
 				o1.addOrder(order);
+				if (statestr.equals("已预订")) {
+					setReminder(true, order.no, time);
+				}
 				Toast.makeText(FloatActivity.this, "添加成功", Toast.LENGTH_SHORT)
 						.show();
 				Intent intent = new Intent();
@@ -301,6 +315,28 @@ public class FloatActivity extends Activity {
 			item.put("供货商", bs.name);
 			mList2.add(bs.name);
 		}
+	}
+
+	public void setReminder(boolean b, int no, long time) {
+		AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+		Intent it = new Intent(FloatActivity.this, MyReceiver.class);
+		it.putExtra("no", no);
+		PendingIntent pi = PendingIntent.getBroadcast(FloatActivity.this, no,
+				it, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		if (b) {
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(time);
+			c.add(Calendar.HOUR, 8);
+			am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pi);
+		} else {
+			am.cancel(pi);
+		}
+	}
+
+	public void finish() {
+		super.finish();
+		this.overridePendingTransition(R.anim.push_bottom_out, 0);
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
