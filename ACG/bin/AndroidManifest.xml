@@ -15,7 +15,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.acg.main.MainActivity"
+            android:name="com.acg.activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
@@ -25,27 +25,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.acg.main.FloatActivity"
+            android:name="com.acg.activity.FloatActivity"
             android:label="@string/app_name"
             android:theme="@style/DialogStyleBottom" />
         <activity
-            android:name="com.acg.main.ModifyActivity"
+            android:name="com.acg.activity.ModifyActivity"
             android:label="@string/app_name"
             android:theme="@style/DialogStyleBottom" />
         <activity
-            android:name="com.acg.main.Other"
+            android:name="com.acg.activity.Other"
             android:label="@string/app_name"
             android:theme="@style/DialogStyleBottom" />
         <activity
-            android:name="com.acg.main.Left"
+            android:name="com.acg.activity.LeftActivity"
             android:label="@string/app_name"
             android:theme="@style/LeftBar" />
 
-        <receiver android:name="com.acg.main.MyReceiver" >
+        <receiver android:name="com.acg.alarm.MyReceiver" >
             <intent-filter>
                 <action android:name="com.acg.main.MyReceiver" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name="com.acg.alarm.LongRunningService"
+            android:enabled="true" >
+        </service>
     </application>
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
